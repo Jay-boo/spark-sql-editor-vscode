@@ -1,0 +1,14 @@
+.vscode/**
+src/**
+test/**
+out/**
+out-test/**
+node_modules/**
+!node_modules/@duckdb
+!node_modules/@duckdb/**
+.gitignore
+tsconfig*.json
+esbuild.js
+esbuild.test.js
+**/*.map
+**/.eslintrc.json

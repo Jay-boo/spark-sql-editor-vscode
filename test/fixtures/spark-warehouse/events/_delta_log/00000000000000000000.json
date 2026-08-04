@@ -1,0 +1,4 @@
+{"protocol":{"minReaderVersion":1,"minWriterVersion":2}}
+{"metaData":{"id":"fixture-table-id","format":{"provider":"parquet","options":{}},"schemaString":"{\"type\":\"struct\",\"fields\":[{\"name\":\"event_id\",\"type\":\"string\",\"nullable\":false,\"metadata\":{}},{\"name\":\"ts\",\"type\":\"long\",\"nullable\":false,\"metadata\":{}},{\"name\":\"payload\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}]}","partitionColumns":["ts"],"configuration":{},"createdTime":1700000000000}}
+{"add":{"path":"ts=1000000/part-00000-fixture.snappy.parquet","partitionValues":{"ts":"1000000"},"size":1234,"modificationTime":1700000000000,"dataChange":true,"stats":"{\"numRecords\":3}"}}
+{"commitInfo":{"timestamp":1700000000000,"operation":"WRITE","operationParameters":{"mode":"Append"}}}

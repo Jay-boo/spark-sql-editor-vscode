@@ -1,0 +1,3 @@
+{
+  "sparkCatalog.warehousePaths": ["/home/jayboo/projects/spark-data/test/fixtures/spark-warehouse"]
+}

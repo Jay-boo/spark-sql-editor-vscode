@@ -1,0 +1,173 @@
+{
+  "name": "spark-local-catalog-explorer",
+  "displayName": "Spark Local Catalog Explorer",
+  "description": "Browse a local Spark warehouse (databases/tables/schemas) like a Unity Catalog explorer, and query it with a Databricks-style SQL editor backed by DuckDB.",
+  "version": "0.0.1",
+  "publisher": "jay-boo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jay-boo/spark-sql-editor-vscode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Jay-boo/spark-sql-editor-vscode/issues"
+  },
+  "homepage": "https://github.com/Jay-boo/spark-sql-editor-vscode#readme",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "spark",
+    "databricks",
+    "delta lake",
+    "parquet",
+    "sql",
+    "duckdb",
+    "unity catalog",
+    "data catalog"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "sparkCatalog",
+          "title": "Spark Catalog",
+          "icon": "media/catalog.svg"
+        }
+      ]
+    },
+    "views": {
+      "sparkCatalog": [
+        {
+          "id": "sparkCatalog.tree",
+          "name": "Warehouses"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "sparkCatalog.tree",
+        "contents": "No Spark warehouse found in this workspace.\n\n[Add Warehouse Folder...](command:sparkCatalog.addWarehouseFolder)\n\nOr open a folder containing a `spark-warehouse` directory, or set `sparkCatalog.warehousePaths` yourself.\n[Open Settings](command:workbench.action.openSettings?%22sparkCatalog.warehousePaths%22)"
+      }
+    ],
+    "commands": [
+      {
+        "command": "sparkCatalog.refresh",
+        "title": "Refresh",
+        "category": "Spark Catalog",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "sparkCatalog.addWarehouseFolder",
+        "title": "Add Warehouse Folder...",
+        "category": "Spark Catalog",
+        "icon": "$(new-folder)"
+      },
+      {
+        "command": "sparkCatalog.showSchema",
+        "title": "Show Schema",
+        "category": "Spark Catalog"
+      },
+      {
+        "command": "sparkCatalog.revealInExplorer",
+        "title": "Reveal in File Explorer",
+        "category": "Spark Catalog"
+      },
+      {
+        "command": "sparkCatalog.newQuery",
+        "title": "New SQL Query",
+        "category": "Spark Catalog"
+      },
+      {
+        "command": "sparkCatalog.newQueryForTable",
+        "title": "New Query for Table",
+        "category": "Spark Catalog"
+      },
+      {
+        "command": "sparkCatalog.runQuery",
+        "title": "Run Spark SQL Query",
+        "category": "Spark Catalog"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "sparkCatalog.refresh",
+          "when": "view == sparkCatalog.tree",
+          "group": "navigation"
+        },
+        {
+          "command": "sparkCatalog.addWarehouseFolder",
+          "when": "view == sparkCatalog.tree",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "sparkCatalog.showSchema",
+          "when": "view == sparkCatalog.tree && viewItem == table",
+          "group": "inline"
+        },
+        {
+          "command": "sparkCatalog.newQueryForTable",
+          "when": "view == sparkCatalog.tree && viewItem == table",
+          "group": "inline"
+        },
+        {
+          "command": "sparkCatalog.revealInExplorer",
+          "when": "view == sparkCatalog.tree && viewItem =~ /^(catalog|database|table)$/"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "sparkCatalog.runQuery",
+        "key": "ctrl+enter",
+        "mac": "cmd+enter",
+        "when": "editorLangId == sql && editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "title": "Spark Catalog",
+      "properties": {
+        "sparkCatalog.warehousePaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "Paths to Spark warehouse directories (workspace-relative or absolute). If empty, auto-detects a 'spark-warehouse' folder in each open workspace folder."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "package": "node esbuild.js --production && vsce package",
+    "typecheck": "tsc --noEmit -p . && tsc --noEmit -p tsconfig.test.json",
+    "test": "node esbuild.test.js && mocha \"out-test/**/*.test.js\""
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^18.19.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.32.0",
+    "esbuild": "^0.28.0",
+    "hyparquet-writer": "^0.16.0",
+    "mocha": "^11.8.0",
+    "typescript": "^5.9.0"
+  },
+  "dependencies": {
+    "@duckdb/node-api": "1.5.5-r.3",
+    "hyparquet": "^1.27.0"
+  },
+  "overrides": {
+    "cheerio": "1.0.0"
+  }
+}

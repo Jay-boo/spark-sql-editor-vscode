@@ -10,6 +10,7 @@ describe('runQuery', () => {
   it('queries an unpartitioned parquet table by db.table name', async () => {
     const result = await runQuery('SELECT * FROM sales.customers ORDER BY id', CATALOGS);
     assert.deepStrictEqual(result.columns, ['id', 'name', 'active']);
+    assert.deepStrictEqual(result.columnTypes, ['INTEGER', 'VARCHAR', 'BOOLEAN']);
     assert.strictEqual(result.rows.length, 3);
     assert.deepStrictEqual(result.rows[0], { id: 1, name: 'Alice', active: true });
   });

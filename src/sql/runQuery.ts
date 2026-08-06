@@ -5,6 +5,7 @@ import { syncCatalogViews } from './registerViews';
 
 export interface QueryResult {
   columns: string[];
+  columnTypes: string[];
   rows: Record<string, unknown>[];
   durationMs: number;
 }
@@ -22,6 +23,7 @@ async function executeAndRead(connection: DuckDBConnection, sql: string): Promis
 
   return {
     columns: reader.columnNames(),
+    columnTypes: reader.columnTypes().map((type) => type.toString()),
     rows: reader.getRowObjectsJson() as Record<string, unknown>[],
     durationMs,
   };

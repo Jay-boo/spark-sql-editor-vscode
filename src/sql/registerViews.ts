@@ -70,7 +70,13 @@ export async function syncCatalogViews(connection: DuckDBConnection, catalogs: C
       continue;
     }
     const viewName = `${quoteIdent(catalogName)}.${quoteIdent(dbName)}.${quoteIdent(table.name)}`;
-    await connection.run(`CREATE OR REPLACE VIEW ${viewName} AS ${source}`);
+    try {
+      await connection.run(`CREATE OR REPLACE VIEW ${viewName} AS ${source}`);
+    } catch (err) {
+      // A single unreadable table (e.g. a corrupt Delta log) must not block registering
+      // — and therefore querying — every other table in the catalog.
+      console.error(`Spark Catalog: skipping ${dbName}.${table.name}, couldn't register as a view:`, err);
+    }
   }
 
   const searchPathEntries = [...new Set(registrations.map((r) => `${quoteIdent(r.catalogName)}.${quoteIdent(r.dbName)}`))];

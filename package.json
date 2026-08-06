@@ -161,6 +161,7 @@
     "esbuild": "^0.28.0",
     "hyparquet-writer": "^0.16.0",
     "mocha": "^11.8.0",
+    "ovsx": "0.9.4",
     "typescript": "^5.9.0"
   },
   "dependencies": {

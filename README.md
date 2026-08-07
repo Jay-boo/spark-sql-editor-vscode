@@ -2,13 +2,14 @@
 
 Browse a local Spark/Hive warehouse the way [Databricks Unity Catalog](https://www.databricks.com/product/unity-catalog) browses tables — and query it with a Databricks-style SQL editor — all without needing a running Spark/JVM process.
 
-
+![Spark Local Catalog Explorer](doc/spark-vscode-extension.png)
 
 ## Features
 
 - **Catalog tree**: Catalog → Database → Table → Column, read directly from your `spark-warehouse` directory layout (no Hive metastore / Derby DB required).
 - **Schema viewer**: click a table for a webview with its columns, types, nullability, partition keys, format (Parquet or Delta), location, and approximate row count.
 - **SQL editor**: write real SQL against your tables — `SELECT * FROM sales.orders WHERE region = 'us'` — and run it with `Ctrl+Enter` / `Cmd+Enter`. Backed by [DuckDB](https://duckdb.org/), which reads your Parquet files and Delta tables (`_delta_log` and all) directly.
+- **Query results — pin & filter**: pin columns (📌) to keep them stuck to the left while scrolling, and filter rows per-column with the inline text boxes under each header. **Clear filters** resets every column at once.
 - **Autocomplete**: type `db.` for real table names, `table.` (or an alias) for real column names, plus SQL keyword completion.
 - **Works with both Parquet and Delta Lake tables**, including partitioned ones (Hive-style `key=value` partitioning is recovered automatically).
 

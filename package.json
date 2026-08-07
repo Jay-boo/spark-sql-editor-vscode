@@ -2,7 +2,7 @@
   "name": "spark-local-catalog-explorer",
   "displayName": "Spark Local Catalog Explorer",
   "description": "Browse a local Spark warehouse (databases/tables/schemas) like a Unity Catalog explorer, and query it with a Databricks-style SQL editor backed by DuckDB.",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "publisher": "jay-boo",
   "license": "MIT",
   "icon": "media/icon.png",

@@ -5,6 +5,7 @@
   "version": "0.1.1",
   "publisher": "jay-boo",
   "license": "MIT",
+  "icon": "media/icon.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/Jay-boo/spark-sql-editor-vscode.git"

@@ -2,6 +2,8 @@
 
 Browse a local Spark/Hive warehouse the way [Databricks Unity Catalog](https://www.databricks.com/product/unity-catalog) browses tables — and query it with a Databricks-style SQL editor — all without needing a running Spark/JVM process.
 
+
+
 ## Features
 
 - **Catalog tree**: Catalog → Database → Table → Column, read directly from your `spark-warehouse` directory layout (no Hive metastore / Derby DB required).

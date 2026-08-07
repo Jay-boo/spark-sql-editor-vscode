@@ -7,7 +7,7 @@ on:
   workflow_dispatch: {}
 
 jobs:
-  publish-open-vsx:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -40,6 +40,9 @@ jobs:
 
       - name: Publish to Open VSX
         run: npx ovsx publish *.vsix -p "${{ secrets.OVSX_PAT }}"
+
+      - name: Publish to VS Code Marketplace
+        run: npx vsce publish --packagePath *.vsix -p "${{ secrets.VSCE_PAT }}"
 
       - name: Upload .vsix as workflow artifact
         uses: actions/upload-artifact@v4
